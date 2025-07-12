@@ -150,7 +150,7 @@ messages = {
                     "ar": "كلمة المرور لا يجب أن تحتوي على أحرف عربية.",
                     "en": "Password must not contain Arabic letters."
                 },
-                "tashkeel": {
+                "contains_formation": {
                     "ar": "كلمة المرور لا يجب أن تحتوي على تشكيل عربي.",
                     "en": "Password must not contain Arabic diacritics (tashkeel)."
                 },

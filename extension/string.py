@@ -9,7 +9,7 @@ class PasswordCondition(Enum):
     NUMBER = "number"
     SPECIAL = "special"
     ARABIC = "arabic"
-    TASHKEEL = "tashkeel"
+    CONTAINS_FORMATION = "contains_formation"
     SPACE = "space"
 
 class Extension(str):
@@ -46,7 +46,7 @@ class Extension(str):
             (PasswordCondition.NUMBER, lambda p: any(c.isdigit() for c in p)),
             (PasswordCondition.SPECIAL, lambda p: any(c in '@$!%*?&' for c in p)),
             (PasswordCondition.ARABIC, lambda p: not RegexPatterns.contains_arabic(p)),
-            (PasswordCondition.TASHKEEL, lambda p: not RegexPatterns.contains_formation(p)),
+            (PasswordCondition.CONTAINS_FORMATION, lambda p: not RegexPatterns.contains_formation(p)),
             (PasswordCondition.SPACE, lambda p: " " not in p),
         ]
         for key, check in conditions:
@@ -62,8 +62,8 @@ class Extension(str):
                         return False, messages["special"]
                     case PasswordCondition.ARABIC:
                         return False, messages["arabic"]
-                    case PasswordCondition.TASHKEEL:
-                        return False, messages["tashkeel"]
+                    case PasswordCondition.CONTAINS_FORMATION:
+                        return False, messages["contains_formation"]
                     case PasswordCondition.SPACE:
                         return False, messages["space"]
         return True, ""

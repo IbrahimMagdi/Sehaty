@@ -18,7 +18,7 @@ class PasswordValidator(BaseValidator):
                 "number": self.msg_helper.get("SignUp", "check_password", "number"),
                 "special": self.msg_helper.get("SignUp", "check_password", "special"),
                 "arabic": self.msg_helper.get("SignUp", "check_password", "arabic"),
-                "tashkeel": self.msg_helper.get("SignUp", "check_password", "tashkeel"),
+                "contains_formation": self.msg_helper.get("SignUp", "check_password", "contains_formation"),
                 "space": self.msg_helper.get("SignUp", "check_password", "space"),
             })
         ]
