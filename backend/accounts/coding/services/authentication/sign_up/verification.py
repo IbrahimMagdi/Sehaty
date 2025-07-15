@@ -74,12 +74,6 @@ class VerifyCodeHandler(BaseValidator):
             self.response_message = self.msg_helper.get("SignUp", "verified", "Invalid")
 
 class VerifiedEmailValidator(VerifyCodeHandler):
-    # def __init__(self, request, email_obj, code, msg_helper):
-    #     super().__init__(request, email_obj, code, msg_helper.lang)
-    #
-    #     self.request = request
-    #     self.msg_helper = msg_helper
-
 
     def check(self):
         check_email = CheckEmailHandler(self.request, self.email_obj, self.msg_helper)
