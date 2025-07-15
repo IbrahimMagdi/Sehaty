@@ -1,8 +1,6 @@
 from typing import Tuple
 from enum import Enum
 from .regex_patterns import RegexPatterns
-
-
 class PasswordCondition(Enum):
     LOWERCASE = "lowercase"
     CAPITAL = "capital"
@@ -70,5 +68,11 @@ class Extension(str):
 
     def validate_choices(self, choices: list, message: str):
         if self.strip().lower() not in [c.lower() for c in choices]:
+            return False, message
+        return True, ""
+
+    @staticmethod
+    def validate_already_exists(exists_func ,message: str):
+        if exists_func():
             return False, message
         return True, ""

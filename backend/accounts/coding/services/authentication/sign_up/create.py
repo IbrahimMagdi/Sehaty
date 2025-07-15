@@ -5,7 +5,8 @@ from .birth_date_validator import BirthDateValidator
 from .password_validator import PasswordValidator
 from .gender_validator import GenderValidator
 from .user_type_validator import UserTypeValidator
-from .verification import ResendEmailValidator, VerifiedEmailValidator
+from .resend_code import ResendEmailValidator
+from .verification import VerifiedEmailValidator
 from .....models import *
 from ..validation_code import *
 from .tasks import send_code_email_task, create_user_password
@@ -165,16 +166,13 @@ class SignUpService:
 
     def resend_code(self):
         type_val = ResendEmailValidator(self.request, self.request.POST.get("email", "").strip(), self.msg_helper)
-        type_val.validate()
-        response_status, response_message, response_data = type_val.get_response()
-        return response_status, response_message, response_data
+        return type_val.check_email()
 
 
     def verify_email(self):
         email_value = self.request.POST.get("email", "").strip()
         code = self.request.POST.get("code", "").strip()
-        check_verified = VerifiedEmailValidator(self.request, code, email_value, self.msg_helper)
-        check_verified.check_email()
-        response_status, response_message, response_data = check_verified.get_response()
-        return response_status, response_message, response_data
+        check_verified = VerifiedEmailValidator(self.request, email_value, code, self.msg_helper)
+        check_verified.check()
+        return check_verified.get_response()
 

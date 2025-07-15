@@ -15,7 +15,7 @@ class BirthDateValidator(BaseValidator):
                 13,
                 100,
                 under_msg="العمر يجب أن يكون 13 سنة على الأقل",
-                over_msg=self.msg_helper.get("check_birth_date", "illogical")
+                over_msg=self.msg_helper.get("SignUp", "check_birth_date", "illogical")
             )
         ]
 

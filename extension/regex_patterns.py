@@ -1,4 +1,5 @@
 import re
+
 class RegexPatterns:
     __EMAIL = re.compile(r"([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])")
     __ARABIC_LETTERS = re.compile(r'[\u0600-\u06FF]')

@@ -99,8 +99,8 @@ messages = {
                     "ar": "بريدك الإلكتروني كبير جدًا ، يجب أن يكون اقل من ٥٠ حرف"
                 },
                 "already_exists": {
-                    "en": "Sorry, this email is owned by someone else",
-                    "ar": "عفوا ، هذا البريد الإلكتروني مملوك من قبل شخص آخر"
+                    "en": "You cannot use this email because it is linked to a different account.",
+                    "ar": "لا يمكنك استخدام هذا البريد لأنه مرتبط بحساب مختلف"
                 },
                 "incorrect": {
                     "en": "This email is incorrect",
