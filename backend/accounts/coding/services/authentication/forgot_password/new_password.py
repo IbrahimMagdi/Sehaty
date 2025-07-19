@@ -62,8 +62,8 @@ class CheckPasswordValidator(PasswordValidator):
         old_pass = UserPasswords.objects.filter(user=user_obj).first()
         if old_pass and check_password(self.value, old_pass.password):
             self.response_status = 400
-            self.response_message = self.msg_helper.get("ForgotPasswordOops", "change_pass", "old_new_equal")
+            self.response_message = self.msg_helper.get("ForgotPassword", "change_pass", "old_new_equal")
             return self.get_response()
         update_password_async.delay(user_obj.id, self.value, code)
         self.response_status = 200
-        self.response_message = self.msg_helper.get("ForgotPasswordOops", "change_pass", "successfully")
+        self.response_message = self.msg_helper.get("ForgotPassword", "change_pass", "successfully")

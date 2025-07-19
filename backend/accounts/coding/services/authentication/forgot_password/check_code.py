@@ -26,13 +26,13 @@ class CheckCodeValidator(UserNameAuthenticator):
         self.check_user()
         self.response_status, self.response_message, self.response_data = self.get_response()
         if self.response_status != 200:
-            self.get_response()
+            return self.get_response()
         email_obj = self.response_data
         validate_code = CodeValidator(self.request, code, self.msg_helper)
         validate_code.validate()
         self.response_status, self.response_message, self.response_data = validate_code.get_response()
         if self.response_status != 200:
-           return  validate_code.get_response()
+           return validate_code.get_response()
         try:
             code_obj = CredibilityCodes.objects.get(email=email_obj, code=code, resat_pass=True, is_done=False, expired=False, finished=False)
             code_obj.resat_pass_code = f'{secrets.token_hex(30)}'

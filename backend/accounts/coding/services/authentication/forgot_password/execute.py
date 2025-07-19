@@ -17,7 +17,7 @@ class ForgotPasswordService:
 
     def check_code(self):
         check = CheckCodeValidator(self.request, self.request.POST.get("username", "").strip(), self.msg_helper)
-        check.check_code(self.request.POST.get("secret_code", "").strip())
+        check.check_code(self.request.POST.get("code", "").strip())
         response_status, response_message, response_data = check.get_response()
         return response_status, response_message, response_data
 

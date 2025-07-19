@@ -16,20 +16,20 @@ class CheckEmailHandler(BaseValidator):
 
         check_email = EmailValidator(self.value, self.msg_helper, check_email_taken_by_other)
         check_email.validate()
-        st, msg, data = check_email.get_response()
-        if st != 200:
-            return st, msg, None
+        self.response_status, self.response_message, self.response_data = check_email.get_response()
+        if self.response_status != 200:
+            return self.response_status, self.response_message, None
         try:
             email_obj = Emails.objects.get(email=self.value, user=self.request.user)
             if email_obj.is_credibility:
-                self.response_message = self.msg_helper.get("SignUp", "verified", "already_verified")
                 self.response_status = 400
+                self.response_message = self.msg_helper.get("SignUp", "verified", "already_verified")
             else:
                 self.response_status = 200
                 self.response_data = email_obj
         except Emails.DoesNotExist:
-            self.response_message = self.msg_helper.get("SignUp", "verified", "not_found")
             self.response_status = 404
+            self.response_message = self.msg_helper.get("SignUp", "verified", "not_found")
 
 
 
@@ -71,6 +71,7 @@ class VerifyCodeHandler(BaseValidator):
             self.response_status = status.HTTP_200_OK
             self.response_message = self.msg_helper.get("SignUp", "verified", "successfully")
         except CredibilityCodes.DoesNotExist:
+            self.response_status = 400
             self.response_message = self.msg_helper.get("SignUp", "verified", "Invalid")
 
 class VerifiedEmailValidator(VerifyCodeHandler):
