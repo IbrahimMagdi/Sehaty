@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import environ
 from pathlib import Path
+import os
 
 
 env = environ.Env(
@@ -27,7 +28,11 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
+if 'VERCEL' in os.environ:
+    ALLOWED_HOSTS = ['.vercel.app']
+else:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ALLOWED_DOMAINS = ["127.0.0.1:8000", "localhost:8000", "localhost"]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -74,6 +79,8 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 LOCAL_APPS = [
     'backend.accounts',
@@ -165,6 +172,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

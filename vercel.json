@@ -1,0 +1,8 @@
+{
+  "builds": [
+    { "src": "Sehaty/wsgi.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "Sehaty/wsgi.py" }
+  ]
+}
