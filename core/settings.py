@@ -29,11 +29,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-if 'VERCEL' in os.environ:
-    ALLOWED_HOSTS = ['.vercel.app']
-else:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 ALLOWED_DOMAINS = ["127.0.0.1:8000", "localhost:8000", "localhost"]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
