@@ -17,10 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from backend.accounts import urls as urls_accounts_site
-
-
+from .views import coming_soon
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('accounts/', include(urls_accounts_site)),
-
+    path('', coming_soon, name='coming_soon'),
 ]
